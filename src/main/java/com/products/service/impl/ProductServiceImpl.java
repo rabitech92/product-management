@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
-        Optional<Product> exitProduct = productRepository.findProductByIdAndStatus(id, Status.ACTIVE);
+        Optional<Product> exitProduct = productRepository.findProductByIdAndStatus(id, Status.ACTIVE.getValue());
         if(exitProduct.isPresent()){
             Product product = exitProduct.get();
             product.setStatus(Status.DELETE);
