@@ -1,20 +1,59 @@
-List API you can see all data which data cary ActiveStatus.ACTIVE
-GET:http://localhost:1010/products/list
-All Data Sorting and pagination of this API
-GET: http://localhost:1010/products
 
-Create Product API and paload
-POST http://localhost:1010/products    
+## API Reference
+
+#### Get all Products which data are active status
+
+```http
+  GET http://localhost:1010/products/list
+```
+### pageation and sorting API
+```http
+GET http://localhost:1010/products
+```
+##create and paylod of product
+```http 
+POST http://localhost:1010/products
+```
+payload :{
+   
+  "name": " Lux soap",
+  "description": "premium quility",
+  "price": 100,
+  "stockQuantity": 10,
+  "category": "soap" 
+
+}
+
+## Update product
+```http Update product
+PUT http://localhost:1010/products/get/id
+```
 {
-    "id": 1,
-    "name": "Sandalina soap",
-    "description": "premium quality",
-    "price": 1.00,
-    "stockQuantity": 0,
+    
+    "name": " Lux soap",
+    "description": "premium quility",
+    "price": 100,
+    "stockQuantity": 10,
     "category": "soap",
-    "createdAt": "2024-10-25T17:39:21.937323",
-    "updatedAt": "2024-10-25T17:39:21.937323",
+    "createdAt": "2024-10-25T18:47:02.04254",
+    "updatedAt": "2024-10-25T20:33:25.04376",
     "activeStatus": "ACTIVE"
 }
-Update Product API
-PUT http://localhost:1010/products/get/{{id}}
+## Update Product
+```http
+PUT http://localhost:1010/products/get/id
+```
+
+##Delete product user see this is deleted but this data not delete it's calld soft delete it will save in database
+```http
+DELETE http://localhost:1010/products/id
+```
+## http only for stockQuantity update
+```http
+PATCH http://localhost:1010/products/id
+```
+## Get by Product ID
+```http
+GET http://localhost:1010/products/id
+```
+
