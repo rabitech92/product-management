@@ -32,17 +32,12 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy) {
-
-        // Validating sortBy field
         if (!isValidSortByField(sortBy)) {
-            sortBy = "id";  // default to a valid field if sortBy is invalid
+            sortBy = "id";
         }
-
-        // Return paginated and sorted data
         return productService.getAllProducts(PageRequest.of(page, size, Sort.by(sortBy)));
     }
 
-    // Helper method to validate sortBy field
     private boolean isValidSortByField(String sortBy) {
         return sortBy.equals("id") || sortBy.equals("name") || sortBy.equals("price"); // add your valid fields here
 
