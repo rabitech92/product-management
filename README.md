@@ -1,5 +1,5 @@
 
-## clone project :
+## Clone project :
 ```http
 https://github.com/rabitech92/product-management.git
 ```
