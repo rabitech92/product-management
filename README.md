@@ -1,6 +1,9 @@
 
+## clone project :
+```http
+https://github.com/rabitech92/product-management.git
+```
 ## API Reference
-
 #### Get all Products which data are active status
 
 ```http
@@ -10,7 +13,7 @@
 ```http
 GET http://localhost:1010/products
 ```
-##create and paylod of product
+## create and paylod of product
 ```http 
 POST http://localhost:1010/products
 ```
@@ -39,12 +42,8 @@ PUT http://localhost:1010/products/get/id
     "updatedAt": "2024-10-25T20:33:25.04376",
     "activeStatus": "ACTIVE"
 }
-## Update Product
-```http
-PUT http://localhost:1010/products/get/id
-```
 
-##Delete product user see this is deleted but this data not delete it's calld soft delete it will save in database
+## Delete product user see this is deleted but this data not delete it's called soft delete it will save in database
 ```http
 DELETE http://localhost:1010/products/id
 ```
