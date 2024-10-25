@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,10 +33,12 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
+    @DateTimeFormat(fallbackPatterns = "dd.mm.yyyy HH:mm:")
     private LocalDateTime createdAt;
+    @DateTimeFormat(fallbackPatterns = "dd.mm.yyyy HH:mm:")
     private LocalDateTime updatedAt;
     @Enumerated
-    private Status status;
+    private ActiveStatus activeStatus;
 
     public Product(String name, String description, BigDecimal price, Integer stockQuantity, String category) {
         setName(name);

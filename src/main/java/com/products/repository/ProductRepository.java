@@ -1,7 +1,7 @@
 package com.products.repository;
 
 import com.products.model.Product;
-import com.products.model.Status;
+import com.products.model.ActiveStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
     Optional<Product> findByName(String name);
-    Optional<Product>  findProductByIdAndStatus(Long id, Status status);
+    Optional<Product>  findProductByIdAndActiveStatus(Long id, ActiveStatus activeStatus);
+    Product findAllByActiveStatus(ActiveStatus activeStatus);
 
 }

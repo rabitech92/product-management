@@ -1,9 +1,8 @@
 package com.products.controller;
 
 import com.products.model.Product;
-import com.products.model.Status;
+import com.products.model.ActiveStatus;
 import com.products.service.ProductService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,6 +19,10 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+    @GetMapping("/list")
+    public List<Product> productList() {
+        return productService.getAllProducts();
     }
 
     @GetMapping
@@ -38,15 +41,15 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product createdProduct = productService.createProduct(product);
-        createdProduct.setStatus(Status.ACTIVE);
+        createdProduct.setActiveStatus(ActiveStatus.ACTIVE);
         createdProduct.setCreatedAt(product.getCreatedAt());
         return ResponseEntity.ok(createdProduct);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    @PutMapping("/get/{id}")
+    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
         Product updatedProduct = productService.updateProduct(id, product);
-        return ResponseEntity.ok(updatedProduct);
+        return productService.updateProduct(id,updatedProduct);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
@@ -54,10 +57,14 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}/update-stock")
+    @PatchMapping("/{id}")
     public ResponseEntity<Product> updateStock(@PathVariable Long id, @RequestParam int stockQuantity) {
         productService.updateStock(id, stockQuantity);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getProductById(id).orElse(null);
     }
 
 
