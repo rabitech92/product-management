@@ -6,6 +6,7 @@ import com.products.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
     @GetMapping("/list")
     public List<Product> productList() {
         return productService.getAllProducts();
@@ -30,20 +32,35 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy) {
+
+        // Validating sortBy field
+        if (!isValidSortByField(sortBy)) {
+            sortBy = "id";  // default to a valid field if sortBy is invalid
+        }
+
+        // Return paginated and sorted data
         return productService.getAllProducts(PageRequest.of(page, size, Sort.by(sortBy)));
     }
 
+    // Helper method to validate sortBy field
+    private boolean isValidSortByField(String sortBy) {
+        return sortBy.equals("id") || sortBy.equals("name") || sortBy.equals("price"); // add your valid fields here
+
+    }
+
     @GetMapping("/get")
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Product createProduct(@RequestBody Product product) {
         Product createdProduct = productService.createProduct(product);
         createdProduct.setActiveStatus(ActiveStatus.ACTIVE);
         createdProduct.setCreatedAt(product.getCreatedAt());
-        return ResponseEntity.ok(createdProduct);
+        return createdProduct;
     }
 
     @PutMapping("/get/{id}")
@@ -58,6 +75,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Product> updateStock(@PathVariable Long id, @RequestParam int stockQuantity) {
         productService.updateStock(id, stockQuantity);
         return ResponseEntity.noContent().build();
