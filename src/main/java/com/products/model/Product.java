@@ -50,6 +50,12 @@ public class Product {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public Product(String name, String description, int stockQuantity) {
+        this.description = description;
+        this.stockQuantity = stockQuantity;
+        this.name = name;
+    }
+
     // Business Rules
     public void setPrice(BigDecimal price) {
         if (price.compareTo(BigDecimal.ZERO) <= 0) {

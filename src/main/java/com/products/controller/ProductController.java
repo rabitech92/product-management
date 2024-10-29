@@ -43,12 +43,6 @@ public class ProductController {
 
     }
 
-    @GetMapping("/get")
-    @ResponseStatus(HttpStatus.OK)
-    public Iterable<Product> getAllProducts() {
-        return productService.getAllProducts();
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Product createProduct(@RequestBody Product product) {
