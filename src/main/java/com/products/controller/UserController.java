@@ -1,15 +1,40 @@
 package com.products.controller;
 
+import com.products.model.Users;
+import com.products.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
+@RequiredArgsConstructor
 public class UserController {
-    @GetMapping
-    public String welcomeUser(HttpServletRequest request) {
-        return "Welcome to the Product Management Application! "+request.getSession().getId()+" + "+ request.getSession().getAttribute("Rabiul");
+
+@Autowired
+ private UserService userService;
+
+
+    @GetMapping("/users")
+    public List<Users> getAllUsers() {
+        return userService.getUsers();
     }
+
+
+    @PostMapping("/register")
+    public Users createUser(@RequestBody Users user) {
+       return userService.createUser(user);
+
+    }
+
+//    @GetMapping("/msg")
+//    public String welcomeUser(HttpServletRequest request) {
+//        return "Welcome to the Product Management Application! "+request.getSession().getId();
+//    }
+
+
 }

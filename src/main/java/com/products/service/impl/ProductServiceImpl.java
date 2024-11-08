@@ -6,6 +6,7 @@ import com.products.repository.ProductRepository;
 import com.products.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
 
     public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
