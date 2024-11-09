@@ -30,11 +30,18 @@ public class UserController {
        return userService.createUser(user);
 
     }
+    @PostMapping("/login")
+    public String login(@RequestBody Users user) {
+        String token = userService.verify(user);
+        if(token.equals("fail"))
+            return "Invalid credentials";
+        return token;
+    }
 
-//    @GetMapping("/msg")
-//    public String welcomeUser(HttpServletRequest request) {
-//        return "Welcome to the Product Management Application! "+request.getSession().getId();
-//    }
+    @GetMapping("/msg")
+    public String welcomeUser(HttpServletRequest request) {
+        return "Welcome to the Product Management Application! "+request.getSession().getId();
+    }
 
 
 }

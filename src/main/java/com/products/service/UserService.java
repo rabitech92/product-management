@@ -8,4 +8,5 @@ public interface UserService {
 
     List<Users> getUsers();
     Users createUser(Users user);
+    String verify(Users users);
 }

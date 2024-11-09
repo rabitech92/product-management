@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
          user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
          return userRepository.save(user);
     }
-
+    @Override
     public String verify(Users users){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(),users.getPassword()));
         if (authentication.isAuthenticated())
