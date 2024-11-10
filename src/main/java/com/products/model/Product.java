@@ -1,5 +1,6 @@
 package com.products.model;
 
+import com.products.enums.ActiveStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -77,6 +78,7 @@ public class Product {
         }
         this.name = name;
     }
+
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();

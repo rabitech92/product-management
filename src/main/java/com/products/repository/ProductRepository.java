@@ -1,7 +1,7 @@
 package com.products.repository;
 
 import com.products.model.Product;
-import com.products.model.ActiveStatus;
+import com.products.enums.ActiveStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

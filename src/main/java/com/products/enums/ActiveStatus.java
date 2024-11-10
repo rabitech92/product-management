@@ -1,6 +1,6 @@
 package com.products.enums;
 
-public enum Status {
+public enum ActiveStatus {
     ACTIVE(1),
     ARCHIVE(2),
     DELETE(3),
@@ -10,12 +10,11 @@ public enum Status {
 
     private final int value;
 
-    Status(int value) {
+    ActiveStatus(int value) {
         this.value = value;
     }
 
     public int getValue() {
         return this.value;
     }
-
 }

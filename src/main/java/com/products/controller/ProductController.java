@@ -1,7 +1,7 @@
 package com.products.controller;
 
 import com.products.model.Product;
-import com.products.model.ActiveStatus;
+import com.products.enums.ActiveStatus;
 import com.products.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
