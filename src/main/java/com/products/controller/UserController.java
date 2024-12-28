@@ -35,7 +35,7 @@ public class UserController {
         String token = userService.verify(user);
         if(token.equals("fail"))
             return "Invalid credentials";
-        return "Token : "+token;
+        return "Token : "+token +"\n Name : "+user.getUsername();
     }
 
     @GetMapping("/msg")
